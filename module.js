@@ -21,12 +21,8 @@ var getSymbol = function (name) {
   return hasSymbol(name) ? Symbol[name] : '@@' + name;
 };
 
-if (hasSymbols() && !hasSymbol('observable')) {
-  Symbol.observable = Symbol('observable');
-}
-
 var SymbolIterator = getSymbol('iterator');
-var SymbolObservable = getSymbol('observable');
+var SymbolObservable = hasSymbols() && !hasSymbol('observable') ? Symbol('observable') : getSymbol('observable');
 var SymbolSpecies = getSymbol('species'); // === Abstract Operations ===
 
 function getMethod(obj, key) {
